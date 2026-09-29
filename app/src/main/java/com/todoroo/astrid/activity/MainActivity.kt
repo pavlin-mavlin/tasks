@@ -506,14 +506,15 @@ class MainActivity : AppCompatActivity() {
                         val drawerState = rememberDrawerState(
                             initialValue = DrawerValue.Closed,
                         )
-                        val navigator = rememberListDetailPaneScaffoldNavigator(
-                            calculatePaneScaffoldDirectiveWithTwoPanesOnMediumWidth(
-                                windowAdaptiveInfo = currentWindowAdaptiveInfo(),
-                            ).copy(
-                                horizontalPartitionSpacerSize = 0.dp,
-                                verticalPartitionSpacerSize = 0.dp,
-                            )
-                        )
+                        val directive = calculatePaneScaffoldDirectiveWithTwoPanesOnMediumWidth(
+ 						   windowAdaptiveInfo = currentWindowAdaptiveInfo(),
+						).copy(
+    						maxHorizontalPartitions = 1,
+    						horizontalPartitionSpacerSize = 0.dp,
+    						verticalPartitionSpacerSize = 0.dp,
+						)
+                        
+						val navigator = rememberListDetailPaneScaffoldNavigator(directive)
                         val keyboard = LocalSoftwareKeyboardController.current
                         LaunchedEffect(state.task) {
                             val pane = if (state.task == null) {
