@@ -48,7 +48,9 @@ android {
     defaultConfig {
         testApplicationId = "org.tasks.test"
         applicationId = libs.versions.applicationId.get()
-        versionCode = libs.versions.versionCode.get().toInt()
+        // Large offset keeps this build "newer" than the Play Store release with the same
+        // applicationId, so Google Play never offers to replace it with the upstream version.
+        versionCode = 1_000_000 + libs.versions.versionCode.get().toInt()
         versionName = libs.versions.versionName.get()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
